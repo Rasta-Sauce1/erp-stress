@@ -2,7 +2,7 @@
 
 Config = {}
 
-Config.debug = true
+Config.debug = false
 
 
 Config.shootingAddsStress = true
@@ -25,6 +25,6 @@ Config.beingStunnedAddsStress = true
 Config.stunnedStress = 10
 Config.stunnedCooldown = 20
 
--- Config.swimmingRemovesStress = true -- coming soon
--- Config.swimmingStress = 1
--- Config.swimmingCooldown = 30
+Config.swimmingRemovesStress = true -- coming soon
+Config.swimmingStress = 1
+Config.swimmingCooldown = 30

@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'Rasta'
 description 'Add stress for shooting, and driving'
-version '1.0.0'
+version '1.0.1'
 
 shared_script 'config.lua'
 

@@ -139,6 +139,29 @@ Citizen.CreateThread(function()
 end)
 
 --= remove stress for swimming =--
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(100)
+        local ped = PlayerPedId()
+        local swimming = IsPedSwimming(ped)
+        local stress = Config.swimmingStress
+        local cooldown = Config.swimmingCooldown * 1000
+
+        if Config.swimmingRemovesStress then
+            if swimming then
+                TriggerEvent('esx_status:remove', 'stress', stress * 10000)
+                if debug then
+                    TriggerEvent('chat:addMessage', {
+                        color = {255, 0, 0},
+                        multiline = true,
+                        args = {'erp-stress debug', stress .. ' stress removed for swimming'}
+                    })
+                end
+                Citizen.Wait(cooldown)
+            end
+        end
+    end
+end)
 
 --= remove stress for walking =--
 Citizen.CreateThread(function()
@@ -149,10 +172,11 @@ Citizen.CreateThread(function()
         local isInVehicle = IsPedInAnyVehicle(ped, false)
         local walking = IsPedWalking(ped)
         local stress = Config.walkingStress
-        local cooldown = Config.walkingCooldown * 1000        
+        local cooldown = Config.walkingCooldown * 1000 
+        local swimming = IsPedSwimming(ped)      
 
         if Config.walkingRemovesStress then
-            if not isInVehicle then
+            if not isInVehicle and not swimming then
                 if walking and walkTimer > 5 then
                     TriggerEvent('esx_status:remove', 'stress', stress * 10000)
 
